@@ -14,9 +14,8 @@
         </Grid.ColumnDefinitions>
 
         <local:NavigationMenu Grid.Column="0" />
-        <Grid Grid.Column="1">
-            <Label Content="wow" />
-        </Grid>
+
+        <ContentControl Grid.Column="1" Content="{Binding CurrentPageViewModel}" />
 
     </Grid>
 </Window>

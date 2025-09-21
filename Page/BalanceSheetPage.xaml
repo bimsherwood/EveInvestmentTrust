@@ -1,0 +1,9 @@
+<UserControl  x:Class="EveInvestmentTrust.Page.BalanceSheetPage"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:local="clr-namespace:EveInvestmentTrust.Page">
+    <Grid>
+        <!-- Inner grid content from MainWindow.xaml goes here -->
+        <Label Content="wow" />
+    </Grid>
+</UserControl >
