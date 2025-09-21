@@ -10,20 +10,22 @@ namespace EveInvestmentTrust;
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : Application
-{
+public partial class App : Application {
 
     public static IServiceProvider ServiceProvider { get; private set; }
-    
-    public App()
-    {
-        
+
+    public App() {
+
         var services = new ServiceCollection();
-        services.AddSingleton<NavigationMenuViewModel>();
-        services.AddSingleton(new List<NavigationMenuItem>
-        {
-            new NavigationMenuItem("Menu Item 1", null)
+
+        // Menu items
+        services.AddSingleton(sc => new List<NavigationMenuItem> {
+            new NavigationMenuItem("Balance Sheet", sc.GetRequiredService<BalanceSheetViewModel>())
         });
+
+        //View Models
+        services.AddSingleton<NavigationMenuViewModel>();
+        services.AddSingleton<BalanceSheetViewModel>();
 
         ServiceProvider = services.BuildServiceProvider();
 
