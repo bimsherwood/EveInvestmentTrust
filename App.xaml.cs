@@ -19,19 +19,23 @@ public partial class App : Application {
 
         var services = new ServiceCollection();
 
+        // Services
+        services.AddSingleton<ModalService>();
+
         // View Models
         services.AddSingleton<NavigationMenuViewModel>();
         services.AddSingleton<BalanceSheetViewModel>();
         services.AddSingleton<SettingsViewModel>();
 
         // Pages
+        services.AddSingleton<TitlePage>();
         services.AddSingleton<BalanceSheetPage>();
         services.AddSingleton<SettingsPage>();
 
         // Menu items
         services.AddSingleton(sc => new List<NavigationMenuItemViewModel> {
-            new NavigationMenuItemViewModel("Balance Sheet", sc.GetRequiredService<BalanceSheetPage>()),
-            new NavigationMenuItemViewModel("Settings", sc.GetRequiredService<SettingsPage>())
+            new NavigationMenuItemViewModel(sc, typeof(BalanceSheetPage), "Balance Sheet"),
+            new NavigationMenuItemViewModel(sc, typeof(SettingsPage), "Settings")
         });
 
         ServiceProvider = services.BuildServiceProvider();

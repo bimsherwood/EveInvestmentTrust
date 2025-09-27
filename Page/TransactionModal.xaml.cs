@@ -3,8 +3,8 @@ using EveInvestmentTrust.ViewModel;
 
 namespace EveInvestmentTrust.Page;
 
-public partial class BalanceSheetPage : UserControl  {
-    public BalanceSheetPage(BalanceSheetViewModel viewModel) {
+public partial class TransactionModal : UserControl  {
+    public TransactionModal(TransactionViewModel viewModel) {
         this.DataContext = viewModel;
         InitializeComponent();
     }

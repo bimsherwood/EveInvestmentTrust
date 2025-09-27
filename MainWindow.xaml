@@ -31,5 +31,18 @@
                         Grid.Column="1"
                         Content="{Binding CurrentPage}" />
 
+        <Border Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Background="#88FFFFFF"
+                Visibility="{Binding ModalOpen}">
+
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Content="{Binding CurrentModal}" />
+            
+        </Border>
+
     </Grid>
 </Window>
