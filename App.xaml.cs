@@ -24,16 +24,19 @@ public partial class App : Application {
 
         // View Models
         services.AddSingleton<NavigationMenuViewModel>();
+        services.AddSingleton<TransactionListViewModel>();
         services.AddSingleton<BalanceSheetViewModel>();
         services.AddSingleton<SettingsViewModel>();
 
         // Pages
         services.AddSingleton<TitlePage>();
+        services.AddSingleton<TransactionListPage>();
         services.AddSingleton<BalanceSheetPage>();
         services.AddSingleton<SettingsPage>();
 
         // Menu items
         services.AddSingleton(sc => new List<NavigationMenuItemViewModel> {
+            new NavigationMenuItemViewModel(sc, typeof(TransactionListPage), "Transactions"),
             new NavigationMenuItemViewModel(sc, typeof(BalanceSheetPage), "Balance Sheet"),
             new NavigationMenuItemViewModel(sc, typeof(SettingsPage), "Settings")
         });

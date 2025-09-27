@@ -1,0 +1,28 @@
+<UserControl  x:Class="EveInvestmentTrust.Page.TransactionListPage"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:local="clr-namespace:EveInvestmentTrust.Page">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Row="0" Grid.Column="0"
+                  ItemsSource="{Binding Transactions}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  Margin="4">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Commodity" Binding="{Binding Commodity}" />
+                <DataGridTextColumn Header="Debit" Binding="{Binding Debit}" />
+                <DataGridTextColumn Header="Credit" Binding="{Binding Credit}" />
+                <DataGridTextColumn Header="Memo" Binding="{Binding Memo}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl >
