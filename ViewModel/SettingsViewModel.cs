@@ -1,9 +1,24 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace EveInvestmentTrust.ViewModel;
 
-public class SettingsViewModel
-{
-    public string ApiKey { get; set; }
-    public string DefaultCurrency { get; set; }
-    public bool EnableNotifications { get; set; }
-    public int RefreshIntervalMinutes { get; set; }
+public partial class SettingsViewModel : ObservableObject {
+
+    [ObservableProperty]
+    public string _swingWindowDaysStr;
+
+    public int? SwingWindowDays {
+        get {
+            if (int.TryParse(this.SwingWindowDaysStr, out int days)) {
+                return days;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public SettingsViewModel() {
+        this.SwingWindowDaysStr = "90";
+    }
+
 }

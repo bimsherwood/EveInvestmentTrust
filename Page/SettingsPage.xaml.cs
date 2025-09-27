@@ -4,7 +4,8 @@ using EveInvestmentTrust.ViewModel;
 namespace EveInvestmentTrust.Page;
 
 public partial class SettingsPage : UserControl  {
-    public SettingsPage() {
+    public SettingsPage(SettingsViewModel viewModel) {
+        this.DataContext = viewModel;
         InitializeComponent();
     }
 }

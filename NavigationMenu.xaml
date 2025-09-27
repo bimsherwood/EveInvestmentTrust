@@ -13,9 +13,10 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0"
-                   Text="ETI"
+                   Text="EIT"
                    FontSize="24"
                    FontWeight="Bold"
+                   Foreground="White"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top" />
 

@@ -10,17 +10,22 @@ public partial class NavigationMenuViewModel : ObservableObject {
     private List<NavigationMenuItemViewModel> _menuItems;
 
     [ObservableProperty]
-    private object _currentPageViewModel;
+    private object _currentPage;
+
+    [ObservableProperty]
+    private string _currentTitle;
 
     public NavigationMenuViewModel(List<NavigationMenuItemViewModel> menuItems) {
         this.MenuItems = menuItems;
-        this.CurrentPageViewModel = menuItems.First().PageViewModel;
+        this.CurrentPage = menuItems.First().Page;
+        this.CurrentTitle = menuItems.First().Name;
     }
 
     [RelayCommand]
     private void Navigate(NavigationMenuItemViewModel? selection) {
         if (selection is not null) {
-            this.CurrentPageViewModel = selection.PageViewModel;
+            this.CurrentPage = selection.Page;
+            this.CurrentTitle = selection.Name;
         }
     }
 

@@ -5,8 +5,4 @@
              xmlns:page="clr-namespace:EveInvestmentTrust.Page"
              xmlns:vm="clr-namespace:EveInvestmentTrust.ViewModel"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
-        <DataTemplate DataType="{x:Type vm:BalanceSheetViewModel}"><page:BalanceSheetPage/></DataTemplate>
-        <DataTemplate DataType="{x:Type vm:SettingsViewModel}"><page:SettingsPage/></DataTemplate>
-    </Application.Resources>
 </Application>

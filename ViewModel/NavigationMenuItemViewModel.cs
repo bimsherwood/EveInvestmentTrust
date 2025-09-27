@@ -9,11 +9,11 @@ public partial class NavigationMenuItemViewModel : ObservableObject {
     private string _name;
     
     [ObservableProperty]
-    private object _pageViewModel;
+    private object _page;
 
-    public NavigationMenuItemViewModel(string name, object pageViewModel) {
-        Name = name;
-        PageViewModel = pageViewModel;
+    public NavigationMenuItemViewModel(string name, object page) {
+        this.Name = name;
+        this.Page = page;
     }
 
 }
