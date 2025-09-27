@@ -5,19 +5,23 @@ using EveInvestmentTrust.ViewModel;
 public class ModalService {
 
     private NavigationMenuViewModel NavigationViewModel;
+    private CommodityDataService CommodityService;
 
-    public ModalService(NavigationMenuViewModel navigationViewModel) {
+    public ModalService(
+            NavigationMenuViewModel navigationViewModel,
+            CommodityDataService commodityService) {
         this.NavigationViewModel = navigationViewModel;
+        this.CommodityService = commodityService;
     }
 
-    public async Task OpenTransaction() {
-        var viewModel = new TransactionViewModel(CloseModal);
+    public async Task<TransactionViewModel?> OpenTransaction() {
+        var commodities = this.CommodityService.GetCommodities();
+        var viewModel = new TransactionViewModel(commodities);
         var modal = new TransactionModal(viewModel);
         this.NavigationViewModel.OpenModal(modal);
-    }
-
-    private void CloseModal() {
+        var success = await viewModel.Complete;
         this.NavigationViewModel.CloseModal();
+        return success ? viewModel : null;
     }
 
 }

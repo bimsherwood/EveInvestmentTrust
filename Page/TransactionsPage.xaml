@@ -9,9 +9,11 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" Grid.Column="0"
+        <DataGrid Grid.Row="0"
+                  Grid.Column="0"
                   ItemsSource="{Binding Transactions}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
@@ -23,6 +25,11 @@
                 <DataGridTextColumn Header="Memo" Binding="{Binding Memo}" />
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button Grid.Row="1"
+                Grid.Column="0"
+                Content="New"
+                Command="{Binding NewTransactionCommand}" />
 
     </Grid>
 </UserControl >

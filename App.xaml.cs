@@ -22,6 +22,9 @@ public partial class App : Application {
         // Services
         services.AddSingleton<ModalService>();
 
+        // Data Service
+        services.AddSingleton<CommodityDataService>();
+
         // View Models
         services.AddSingleton<NavigationMenuViewModel>();
         services.AddSingleton<TransactionListViewModel>();

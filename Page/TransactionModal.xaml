@@ -1,8 +1,7 @@
 <UserControl  x:Class="EveInvestmentTrust.Page.TransactionModal"
               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-              xmlns:local="clr-namespace:EveInvestmentTrust.Page"
-              >
+              xmlns:local="clr-namespace:EveInvestmentTrust.Page" >
 
     <UserControl.Resources>
         <Style TargetType="Label">
@@ -19,30 +18,106 @@
             Background="white"
             CornerRadius="16"
             Padding="16">
-        <Grid>
+        <Grid MinWidth="250">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <!-- 0: Buy (.) -->
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <!-- 2: Commodity [v] -->
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <!-- 5: Brokerage [./] -->
+                <RowDefinition Height="Auto" />
+                <!-- 6: Buttons -->
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
+            <!-- Row 0: Buy Radio Button -->
             <Label Grid.Row="0"
                    Grid.Column="0"
-                   Content="O NO!" />
-            <TextBox Grid.Row="0"
-                     Grid.Column="1"
-                     VerticalAlignment="Center"
-                     Text="{Binding SwingWindowDaysStr, Mode=TwoWay}" />
+                   VerticalAlignment="Center"
+                   Content="Buy:" />
+            <RadioButton Grid.Row="0"
+                         Grid.Column="1"
+                         VerticalAlignment="Center"
+                         GroupName="TransactionType"
+                         Content="Buy"
+                         IsChecked="{Binding IsBuy}" />
+
+            <!-- Row 1: Sell Radio Button -->
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Content="Sell:" />
+            <RadioButton Grid.Row="1"
+                         Grid.Column="1"
+                         VerticalAlignment="Center"
+                         GroupName="TransactionType"
+                         Content="Sell" />
             
-            <Button Grid.Row="1"
+            <!-- Row 2: Commodity Dropdown -->
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Content="Commodity:" />
+            <ComboBox Grid.Row="2"
+                      Grid.Column="1"
+                      VerticalAlignment="Center"
+                      ItemsSource="{Binding CommodityOptions}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding SelectedCommodity}" />
+            
+            <!-- Row 3: Quantity -->
+            <Label Grid.Row="3"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Content="Quantity:" />
+            <TextBox Grid.Row="3"
                     Grid.Column="1"
-                    Content="Close"
-                    Command="{Binding CloseCommand}" />
+                    VerticalAlignment="Center"
+                    TextAlignment="Right"
+                    Text="{Binding QuantityStr}" />
+
+            <!-- Row 4: Quantity -->
+            <Label Grid.Row="4"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Content="Price:" />
+            <TextBox Grid.Row="4"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    TextAlignment="Right"
+                    Text="{Binding PriceStr}" />
+            
+            <!-- Row 5: Brokerage? -->
+            <Label Grid.Row="5"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Content="Brokerage?" />
+            <CheckBox Grid.Row="5"
+                      Grid.Column="1"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding IncludesBrokerage}" />
+
+            <!-- Row 6: Horizontal StackPanel floated right -->
+            <StackPanel Grid.Row="6"
+                        Grid.ColumnSpan="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Content="Cancel"
+                        Margin="0,0,4,0"
+                        Command="{Binding CancelCommand}" />
+                <Button Content="Create"
+                        Margin="0,0,4,0"
+                        Command="{Binding CreateCommand}" />
+            </StackPanel>
 
         </Grid>
     </Border>
-</UserControl >
+</UserControl>
