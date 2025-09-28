@@ -19,6 +19,14 @@
                   CanUserAddRows="False"
                   Margin="4">
             <DataGrid.Columns>
+                <DataGridTemplateColumn Width="Auto" Header="Edit">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edit"
+                                    Command="{Binding EditCommand}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Commodity" Binding="{Binding Commodity}" />
                 <DataGridTextColumn Header="Debit" Binding="{Binding Debit}" />
                 <DataGridTextColumn Header="Credit" Binding="{Binding Credit}" />

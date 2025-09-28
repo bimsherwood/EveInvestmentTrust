@@ -34,7 +34,9 @@
                 <RowDefinition Height="Auto" />
                 <!-- 5: Brokerage [./] -->
                 <RowDefinition Height="Auto" />
-                <!-- 6: Buttons -->
+                <!-- 6: Memo -->
+                <RowDefinition Height="Auto" />
+                <!-- 7: Buttons -->
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
@@ -59,7 +61,8 @@
                          Grid.Column="1"
                          VerticalAlignment="Center"
                          GroupName="TransactionType"
-                         Content="Sell" />
+                         Content="Sell"
+                         IsChecked="{Binding IsSell, Mode=OneWay}" />
             
             <!-- Row 2: Commodity Dropdown -->
             <Label Grid.Row="2"
@@ -105,17 +108,27 @@
                       VerticalAlignment="Center"
                       IsChecked="{Binding IncludesBrokerage}" />
 
-            <!-- Row 6: Horizontal StackPanel floated right -->
-            <StackPanel Grid.Row="6"
+            <!-- Row 6: Brokerage? -->
+            <Label Grid.Row="6"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Content="Memo" />
+            <TextBox Grid.Row="6"
+                     Grid.Column="1"
+                     VerticalAlignment="Center"
+                     Text="{Binding Memo}" />
+
+            <!-- Row 7: Horizontal StackPanel floated right -->
+            <StackPanel Grid.Row="7"
                         Grid.ColumnSpan="2"
                         Orientation="Horizontal"
                         HorizontalAlignment="Right">
                 <Button Content="Cancel"
                         Margin="0,0,4,0"
                         Command="{Binding CancelCommand}" />
-                <Button Content="Create"
+                <Button Content="Accept"
                         Margin="0,0,4,0"
-                        Command="{Binding CreateCommand}" />
+                        Command="{Binding AcceptCommand}" />
             </StackPanel>
 
         </Grid>

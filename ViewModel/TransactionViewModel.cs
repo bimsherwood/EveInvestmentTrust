@@ -6,7 +6,15 @@ namespace EveInvestmentTrust.ViewModel;
 public partial class TransactionViewModel : ObservableObject {
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsSell))]
     private bool _isBuy;
+    public bool IsSell => !this.IsBuy;
+
+    [ObservableProperty]
+    private bool _includesBrokerage;
+
+    [ObservableProperty]
+    private string _memo;
 
     [ObservableProperty]
     private List<Commodity> _commodityOptions;
@@ -15,13 +23,38 @@ public partial class TransactionViewModel : ObservableObject {
     private Commodity _selectedCommodity;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(Quantity))]
+    [NotifyPropertyChangedFor(nameof(TotalDebit))]
+    [NotifyPropertyChangedFor(nameof(TotalCredit))]
     private string _quantityStr;
+    public decimal? Quantity {
+        get {
+            if (decimal.TryParse(this.QuantityStr, out var qty)) {
+                return qty;
+            }
+            return null;
+        }
+        set {
+            this.QuantityStr = (value ?? 0).ToString("0.##");
+        }
+    }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(Price))]
+    [NotifyPropertyChangedFor(nameof(TotalDebit))]
+    [NotifyPropertyChangedFor(nameof(TotalDebit))]
     private string _priceStr;
-
-    [ObservableProperty]
-    private bool _includesBrokerage;
+    public decimal? Price {
+        get {
+            if (decimal.TryParse(this.PriceStr, out var qty)) {
+                return qty;
+            }
+            return null;
+        }
+        set {
+            this.PriceStr = (value ?? 0).ToString("0.##");
+        }
+    }
 
     public decimal? TotalDebit {
         get {
@@ -43,17 +76,18 @@ public partial class TransactionViewModel : ObservableObject {
     public Task<bool> Complete => CompleteSource.Task;
 
     public TransactionViewModel(List<Commodity> commodtyOptions) {
-        this.IsBuy = true;
         this.CompleteSource = new TaskCompletionSource<bool>();
+        this.IsBuy = true;
+        this.IncludesBrokerage = true;
+        this.Memo = "";
         this.CommodityOptions = commodtyOptions;
         this.SelectedCommodity = commodtyOptions.First();
-        this.QuantityStr = "0";
-        this.PriceStr = "0";
-        this.IncludesBrokerage = true;
+        this.Quantity = 0;
+        this.Price = 0;
     }
 
     [RelayCommand]
-    private async Task Create() {
+    private async Task Accept() {
         this.CompleteSource.SetResult(true);
     }
 

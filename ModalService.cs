@@ -24,4 +24,12 @@ public class ModalService {
         return success ? viewModel : null;
     }
 
+    public async Task<bool> EditTransaction(TransactionViewModel viewModel) {
+        var modal = new TransactionModal(viewModel);
+        this.NavigationViewModel.OpenModal(modal);
+        var success = await viewModel.Complete;
+        this.NavigationViewModel.CloseModal();
+        return success;
+    }
+
 }

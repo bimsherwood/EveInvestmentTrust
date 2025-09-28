@@ -7,22 +7,28 @@ public partial class TransactionListViewModel : ObservableObject {
     [ObservableProperty]
     private ObservableCollection<TransactionRowViewModel> _transactions;
 
+    private CommodityDataService CommodityDataService;
     private ModalService ModalService;
 
-    public TransactionListViewModel(ModalService navigationService) {
-        _transactions = new ObservableCollection<TransactionRowViewModel>();
+    public TransactionListViewModel(
+            CommodityDataService comodityDataService,
+            ModalService navigationService) {
+        this.CommodityDataService = comodityDataService;
         this.ModalService = navigationService;
+        _transactions = new ObservableCollection<TransactionRowViewModel>();
     }
 
     [RelayCommand]
     private async Task NewTransaction() {
         var newTrans = await this.ModalService.OpenTransaction();
         if (newTrans != null) {
-            var newRow = new TransactionRowViewModel();
+            var newRow = new TransactionRowViewModel(this.CommodityDataService, this.ModalService);
             newRow.Commodity = newTrans.SelectedCommodity.Name;
-            newRow.Debit = newTrans.TotalDebit?.ToString("0.##") ?? "";
-            newRow.Credit = newTrans.TotalCredit?.ToString("0.##") ?? "";
-            newRow.Memo = "Sugma";
+            newRow.Quantity = newTrans.Quantity ?? 0;
+            newRow.Price = newTrans.Price ?? 0;
+            newRow.IsBuy = newTrans.IsBuy;
+            newRow.IncludesBrokerage = newTrans.IncludesBrokerage;
+            newRow.Memo = newTrans.Memo;
             this.Transactions.Add(newRow);
         }
     }
